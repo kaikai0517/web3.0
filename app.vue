@@ -1,8 +1,8 @@
 <template>
-	<div id="app" class="bg-primary" style="font-family: '手札體-繁'">
+	<div id="app" class="bg-primary " style="font-family: '手札體-繁'">
 		<n-loading-bar-provider>
 			<n-message-provider>
-				<NuxtPage />
+				<NuxtPage  class='max-w-[768px] mx-auto'/>
 			</n-message-provider>
 		</n-loading-bar-provider>
 	</div>
