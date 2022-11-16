@@ -2,13 +2,18 @@
 	<div class="px-5 gap-7 relative h-[100vh] pb-10">
 		<div class="sticky top-5 right-0">
 			<div class="flex justify-end" v-if="walletStore.connected">
-				<n-icon
-					color="#ffffff"
-					size="30"
-					@click="popupStore.sideMenuShow = true"
-				>
-					<ReorderThreeSharp />
-				</n-icon>
+				<n-tooltip :show="tooltipShow" trigger="hover">
+					<template #trigger>
+						<n-icon
+							color="#ffffff"
+							size="30"
+							@click="popupStore.sideMenuShow = true"
+						>
+							<ReorderThreeSharp />
+						</n-icon>
+					</template>
+					switch chain
+				</n-tooltip>
 			</div>
 		</div>
 		<div
@@ -31,7 +36,9 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="text-center text-third text-2xl">
+			{{ walletStore?.connected ? "取得你的錢包資訊" : "連接你的錢包" }}
+		</div>
 		<div class="flex justify-center mt-[10vh]">
 			<button
 				class="bg-secondary neon-icon px-5 py-2 rounded-md border-0"
@@ -40,6 +47,7 @@
 				{{ walletStore?.connected ? "Call contract" : "Connect wallet" }}
 			</button>
 		</div>
+
 		<div
 			class="neon-text text-center animate__animated animate__zoomIn mt-5 text-white"
 		>
@@ -65,6 +73,8 @@ const walletStore = useWalletStore();
 const message = useMessage();
 const loadingBar = useLoadingBar();
 
+const tooltipShow = ref(false);
+
 const connet = async () => {
 	if (window.ethereum) {
 		// first we check if metamask is installed
@@ -80,6 +90,7 @@ const connet = async () => {
 			} catch (error) {
 				message.success("連接失敗");
 			}
+			// tooltipShow.value = true;
 			loadingBar.finish();
 		} else {
 			try {
@@ -95,7 +106,9 @@ const connet = async () => {
 	}
 };
 
-onMounted(() => {});
+onMounted(() => {
+	tooltipShow.value = true;
+});
 </script>
 
 <style scoped>
