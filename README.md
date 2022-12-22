@@ -1,3 +1,6 @@
+網站：
+https://web3-0-tan.vercel.app/
+
 主要功能：
 利用nuxt.js與web3.js製作一個可以登入metamask查詢餘額與切換鏈的網站
 
